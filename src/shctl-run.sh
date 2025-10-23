@@ -1,6 +1,6 @@
-# args must be exactly 2
-if [ $# -ne 2 ]; then
-    echo >&2 "Error: Exactly two arguments required."
+# args must be exactly 3
+if [ $# -ne 3 ]; then
+    echo >&2 "Error: Exactly three arguments required."
     return 1
 fi
 

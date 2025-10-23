@@ -32,11 +32,14 @@ shctl ()
             fi
             local script_name="$1"
             local script_path="${scripts_dir}/${script_name}.sh"
+            local active_path="${actives_dir}/${script_name}.sh"
+            local script_name="${1##*/}"
+            script_name="${script_name%.sh}"
             if [ ! -f "${script_path}" ]; then
                 echo >&2 "Error: Script '${script_name}' not found."
                 return 1
             fi
-            . "${cmd_path}" "${script_path}" "${actives_dir}"
+            . "${cmd_path}" "${script_path}" "${active_path}" "${script_name}"
             ;;
         list)
             . "${cmd_path}" "${scripts_dir}" "${actives_dir}"
