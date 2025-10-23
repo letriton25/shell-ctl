@@ -8,11 +8,10 @@ shctl ()
     local shctl_dir=~/.bashrc.d
     local src_dir=${shctl_dir}/src
     local script_dir=${shctl_dir}/scripts
+    local actives_dir=${shctl_dir}/actives
 
     local usage_path="${src_dir}/shctl-usage.sh"
     local version_path="${src_dir}/shctl-version.sh"
-
-    local config_path="${shctl_dir}/shctl.conf"
 
     # check arguments
     if [ $# -eq 0 ]; then
@@ -37,7 +36,7 @@ shctl ()
                 echo >&2 "Error: Script '${script_name}' not found."
                 return 1
             fi
-            . "${cmd_path}" "${script_path}" "${config_path}"
+            . "${cmd_path}" "${script_path}" "${actives_dir}"
             ;;
         help|--help)
             . "${usage_path}"
@@ -53,3 +52,12 @@ shctl ()
     esac
     return 0
 }
+
+##################
+# STARTUP SYSTEM #
+##################
+
+for active in ~/.bashrc.d/actives/*; do
+    [ -h "$active" ] || continue
+    . "$active"
+done
