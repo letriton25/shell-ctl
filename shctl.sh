@@ -7,7 +7,7 @@ shctl ()
     # variables
     local shctl_dir=~/.bashrc.d
     local src_dir=${shctl_dir}/src
-    local script_dir=${shctl_dir}/scripts
+    local scripts_dir=${shctl_dir}/scripts
     local actives_dir=${shctl_dir}/actives
 
     local usage_path="${src_dir}/shctl-usage.sh"
@@ -31,12 +31,15 @@ shctl ()
                 return 1
             fi
             local script_name="$1"
-            local script_path="${script_dir}/${script_name}.sh"
+            local script_path="${scripts_dir}/${script_name}.sh"
             if [ ! -f "${script_path}" ]; then
                 echo >&2 "Error: Script '${script_name}' not found."
                 return 1
             fi
             . "${cmd_path}" "${script_path}" "${actives_dir}"
+            ;;
+        list)
+            . "${cmd_path}" "${scripts_dir}" "${actives_dir}"
             ;;
         help|--help)
             . "${usage_path}"
@@ -61,3 +64,4 @@ for active in ~/.bashrc.d/actives/*; do
     [ -h "$active" ] || continue
     . "$active"
 done
+unset active
