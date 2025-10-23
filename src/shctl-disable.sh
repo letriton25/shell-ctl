@@ -6,8 +6,7 @@ fi
 
 # remove symlink in actives directory if it exists
 if [ ! -e "$2" ] || [ ! -h "$2" ]; then
-    echo "Script '$3' is not enabled."
+    echo "'$3' is not enabled"
 else
     rm "$2"
-    echo "Script '$3' disabled."
 fi

@@ -24,7 +24,7 @@ shctl ()
 
     # command parsing
     case "$cmd" in
-        run|enable|disable|status)
+        run|enable|disable|status|remove)
             if [ $# -ne 1 ]; then
                 echo >&2 "Error: Script name required for '$cmd' command."
                 . "${usage_path}"
